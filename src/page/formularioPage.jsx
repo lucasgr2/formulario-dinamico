@@ -8,7 +8,7 @@ import FormSucessoPage from './formSucessoPage.jsx';
  //O status pode ser = 0 (Form Desativado) , 1 (Já Respondido) , 2 (Disponivel) , 3 (Enviado com Sucesso)
 function FormularioPage() {
   //ESSE STATE DEVE SER FORNECIDO PELO CONTEXT DE LOGIN NA APLICAÇÃO FINAL
-  const [status, setStatus] = useState(1);
+  const [status, setStatus] = useState(2);
   if(status == 0){
     return( <FormDesativadoPage/> )
   }else if(status == 1){
@@ -16,7 +16,7 @@ function FormularioPage() {
   }else if(status == 2){
     return (
       <AnswersProvider>
-        <FormularioLayout {...status}/>
+        <FormularioLayout />
       </AnswersProvider>   
     )
   }else if(status == 3){

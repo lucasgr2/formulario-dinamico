@@ -1,4 +1,4 @@
-function FormTerm(){
+export default function Step2(){
     return(
       <div>
         <h1 className="form__titulo">Instruções do formulario</h1>
@@ -14,5 +14,3 @@ function FormTerm(){
     )
     
 }
-
-export default FormTerm;

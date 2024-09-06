@@ -1,4 +1,4 @@
-export default function FormStart(){
+export default function Step1(){
     
     return(
         <div>

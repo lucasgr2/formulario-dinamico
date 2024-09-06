@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useEffect,useState } from "react";
-import { useAnswers } from "../../hooks/answersContext";
+import { useAnswers } from "../context/answersContext";
 
-function FormTurma(){
+export default function Step4(){
     const {data, updateSetData} = useAnswers();
     // Para exibir as turmas do tipo ensino selecionado
     const [turmas, setTurmas] = useState([]);
@@ -35,7 +35,3 @@ function FormTurma(){
     )
       
   }
-  
-
-
-  export default FormTurma;

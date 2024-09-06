@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState,useEffect } from "react";
+import { useAnswers } from "../context/answersContext";
 
-export default function FormDisciplina({data,updateSetData}){
+export default function Step5(){
     const [materias, setMaterias] = useState([]);
+    const {data,updateSetData} = useAnswers();
     useEffect(()=>{
         async function fetchData() {
             const materiasResponse = await fetch(`http://localhost:3333/materias/${data.turma}`);

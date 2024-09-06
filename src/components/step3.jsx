@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useAnswers } from "../../hooks/answersContext";
+import { useAnswers } from "../context/answersContext";
 
-function FormType(){
+export default function Step3(){
   const{data,updateSetData} = useAnswers();
   return(
     <div>
@@ -24,5 +24,3 @@ function FormType(){
   )
     
 }
-
-export default FormType;

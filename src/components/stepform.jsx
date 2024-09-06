@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState,useEffect } from "react";
-export default function FormFinal({data,updateSetData}){
-  console.log(data)
+import { useAnswers } from "../context/answersContext";
+export default function StepForm(){
+  const {data,updateSetData} = useAnswers();
+  console.log(data);
   const [perguntas, setPerguntas] = useState([]);
   const [materias, setMaterias] = useState([]);
   const t =["Sempre","Quase sempre","Ás vezes","Raramente","Nunca"];

@@ -2,30 +2,34 @@
 import logoif from '../assets/logoif.png';
 // Estado das etapas
 import  UseForm  from '../hooks/stepContext.jsx';
+// Context das respostas
+import { useAnswers } from '../context/answersContext.jsx';
 
 // Etapas do Formulário
-import FormStart from './step1.jsx';
-//import FormTerm from './formTerm';
-//import FormType from './formType';
-//import FormTurma from './formTurma';
+import Step1 from './step1.jsx';
+import Step2 from './step2.jsx';
+import Step3 from './step3.jsx';
+import Step4 from './step4.jsx';
+import Step5 from './step5.jsx';
+import StepForm from './stepform.jsx';
 
 
 export default function FormularioLayout(){ 
-    
+    const {data} = useAnswers();
      
     const FormsComponents = [
-        <FormStart />,
-        //<FormTerm />,
-        //<FormType />,
-        //<FormTurma />,
-        //  ...(data.tipoEnsino === "Superior"
-        //    ? [
-        //        <FormDisciplina key="disciplina1" />,
-        //        <FormFinal key="final" />
-        //      ]
-        //    : [
-        //        <FormFinal key="final" />
-        //      ])
+        <Step1 />,
+        <Step2 />,
+        <Step3 />,
+        <Step4 />,
+          ...(data.tipoEnsino === "Superior"
+           ? [
+                <Step5 key="disciplina1" />,
+                <StepForm key="final" />
+              ]
+            : [
+               <StepForm key="final" />
+              ])
        ];
 
      const {currentStep, currentComponent, updateSteps, isFirstStep} = UseForm(FormsComponents);
