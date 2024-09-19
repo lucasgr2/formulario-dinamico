@@ -1,28 +1,38 @@
 /* eslint-disable react/prop-types */
 import { useState,useEffect } from "react";
 import { useAnswers } from "../context/answersContext";
+
 export default function StepForm(){
+  // Context das respostas
   const {data,updateSetData} = useAnswers();
-  console.log(data);
+  // Estado para receber as perguntas da API
   const [perguntas, setPerguntas] = useState([]);
+  // Estado para receber as materias da API de acordo com a turma
   const [materias, setMaterias] = useState([]);
+  
   const t =["Sempre","Quase sempre","Ás vezes","Raramente","Nunca"];
+  
   // Realiza a requisição das tabelas de perguntas e matérias
   useEffect(()=>{
     async function fetchData() {
+
       const perguntasResponse = await fetch("http://localhost:3333/perguntas");
       const perguntasData = await perguntasResponse.json();
       setPerguntas(perguntasData);
-      const materiasResponse = await fetch(`http://localhost:3333/MateriaProfessor/${data.turma}`);
+
+      const materiasResponse = await fetch(`http://localhost:3333/relacaoAulas/${data.turma}`);
       const materiasData = await materiasResponse.json();
       setMaterias(materiasData);
+
       if (data.materias.length > 0){
-        const arrayFiltrado = await materiasData.filter(objeto => data.materias.includes(objeto.id));
+        const arrayFiltrado = await materiasData.filter(objeto => data.materias.includes(objeto.id_materia));
         setMaterias(arrayFiltrado);
       }  
     }
-    fetchData()
+    fetchData();
   },[])
+
+
   // Renderiza os dados das tabelas
   return (
     <div className="form__final__container">
@@ -40,13 +50,12 @@ export default function StepForm(){
             </div>
             {/* MAPEANDO AS MATERIAS */}
             {materias.map((materia) => (
-              materia.professores.map((professor) => (
+              
                 
                 <div key={materia.id} className="form__options"> 
-                {console.log(professor)}
                 <div className="form__options__title">
-                  <h2 key={materia.id} className="form__final__text">{materia.materia}</h2>
-                  <h2 key={materia.id} className="form__final__text">{professor.nome}</h2>
+                  <h2 key={materia.id} className="form__final__text">{materia.materias.materia}</h2>
+                  <h2 key={materia.id} className="form__final__text">{materia.professores.nome}</h2>
                 </div>
 
                 <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="0" required />
@@ -55,21 +64,21 @@ export default function StepForm(){
                 <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="3" required />
                 <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="4" required />
               </div>
-              ))
+              
             ))}
           </div>
         ) : (
           <div key={pergunta.id}>
             <h3 key={pergunta.id}>{`${pergunta.id}. ${pergunta.pergunta}`}</h3>
             {materias.map((materia) => (
-              materia.professores.map((professor) => (
+              
               <div key={materia.id}>
-                <h2 key={materia.id}>{materia.materia}</h2>
-                <h2 key={materia.id}>{professor.nome}</h2>
+                <h2 key={materia.id}>{materia.materias.materia}</h2>
+                <h2 key={materia.id}>{materia.professores.nome}</h2>
                 <br></br><br></br>
                 <input type="text" name={`${pergunta.id}${materia.idMateria}`} id="" />
               </div>
-              ))
+              
             ))}
           </div>
         )

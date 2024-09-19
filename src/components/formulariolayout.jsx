@@ -41,13 +41,13 @@ export default function FormularioLayout(){
             <div>
                 <img className='logoif' src={logoif} alt="" />
             </div>
-            <form onSubmit={(e)=>updateSteps(currentStep+1,e)}>
+            <form id='form' onSubmit={(e)=>updateSteps(currentStep+1,e)}>
                 <div>
                     {currentComponent}
                 </div><br /><br />
                 <div className='flex justify-evenly'>
                     {!isFirstStep &&
-                        <button className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow' type="button" onClick={()=>updateSteps(currentStep-1)}>
+                        <button className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow' type="button" onClick={()=>updateSteps(currentStep-1,)}>
                             <span>Voltar</span>
                         </button>
                     }
