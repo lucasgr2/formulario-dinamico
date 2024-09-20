@@ -39,7 +39,7 @@ export default function FormularioLayout(){
     return(
         <div className='max-w-lg m-auto my-5 shadow-xl rounded-lg p-3'>
             <div>
-                <img className='logoif' src={logoif} alt="" />
+                <img className='logoif w-16' src={logoif} alt="" />
             </div>
             <form id='form' onSubmit={(e)=>updateSteps(currentStep+1,e)}>
                 <div>

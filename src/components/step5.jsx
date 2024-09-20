@@ -16,7 +16,7 @@ export default function Step5(){
         
     return(
         <>
-        <h1 className="form__titulo">Seleção de Disciplinas</h1>
+        <h1 className="form__titulo text-2xl font-bold text-green-900 text-center">Seleção de Disciplinas</h1>
         <div className="checkbox__container">
         {materias.map((materia) => (
             <label key={materia.id}>

@@ -5,7 +5,7 @@ export default function Step3(){
   const{data,updateSetData} = useAnswers();
   return(
     <div>
-      <h1 className='form__titulo'>Tipo de Ensino</h1>
+      <h1 className='form__titulo text-2xl font-bold text-green-900 text-center'>Tipo de Ensino</h1>
       <div className="form__options__container">
         <label>
           <input className="radio-input" type="radio" name="ensino" id="medio" value="medio" checked ={data.tipoEnsino==="medio"} onChange={(e)=>updateSetData("tipoEnsino",e.target.value)} required/>

@@ -35,48 +35,51 @@ export default function StepForm(){
 
   // Renderiza os dados das tabelas
   return (
-    <div className="form__final__container">
-      {/* MAPEANDO POR PERGUNTA */}
-      {perguntas.map((pergunta) => (
-        //SE FOR DE MARCAR
-        pergunta.tipo === "F" ? (
-          <div key={pergunta.id}>
-            <h3 key={pergunta.id} className="final__pergunta__fechada">{`${pergunta.id}. ${pergunta.pergunta}`}</h3>
-            {/* PASSANDO O TEXTO DAS OPÇÕES */}
-            <div className="form__options">
-              {t.map((item, index) => (
-                <p key={index} className={`P${index}`}>{item}</p>
-              ))}
-            </div>
-            {/* MAPEANDO AS MATERIAS */}
-            {materias.map((materia) => (
-              
-                
-                <div key={materia.id} className="form__options"> 
-                <div className="form__options__title">
-                  <h2 key={materia.id} className="form__final__text">{materia.materias.materia}</h2>
-                  <h2 key={materia.id} className="form__final__text">{materia.professores.nome}</h2>
-                </div>
+    <>
+      <h1 className="text-2xl font-bold text-green-900 text-center">FICHA DE AVALIAÇÃO DO <br/> DOCENTE PELO DISCENTE DO IFNMG </h1>
+      <p className="text-base font-normal  text-center">(Aprovado pela resolução CONSUP Nº 79, de 23 de dezembro de 2019)</p>
 
-                <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="0" required />
-                <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="1" required />
-                <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="2" required />
-                <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="3" required />
-                <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="4" required />
+      <div>
+        {/* MAPEANDO POR PERGUNTA */}
+        {perguntas.map((pergunta) => (
+          //SE FOR DE MARCAR
+          pergunta.tipo === "F" ? (
+            <div className="grid grid-cols-5 gap-y-4 mt-7" key={pergunta.id}>
+              <h3 key={pergunta.id} className="font-medium col-span-5">{`${pergunta.id}. ${pergunta.pergunta}`}</h3>
+              {/* PASSANDO O TEXTO DAS OPÇÕES */}
+              <div className="col-start-3 col-end-6 text-xs flex justify-around ">
+                {t.map((item, index) => (
+                  <p key={index} className={`P${index}`}>{item}</p>
+                ))}
               </div>
+              {/* MAPEANDO AS MATERIAS */}
+              {materias.map((materia) => (
               
-            ))}
-          </div>
+                <div key={materia.id} className="grid grid-cols-subgrid col-span-5 "> 
+                  <div className="text-sm font-medium col-start-1 col-end-3">
+                    <h2 key={materia.id}>{materia.materias.materia}</h2>
+                    <h2 key={materia.id}>{materia.professores.nome}</h2>
+                  </div>
+                  <div className=" col-start-3 col-end-6 flex justify-around">
+                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="0" required />
+                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="1" required />
+                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="2" required />
+                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="3" required />
+                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="4" required />
+                  </div>
+                </div>
+              ))}
+
+            </div>
         ) : (
           <div key={pergunta.id}>
-            <h3 key={pergunta.id}>{`${pergunta.id}. ${pergunta.pergunta}`}</h3>
+            <h3 key={pergunta.id} className="font-medium mt-7">{`${pergunta.id}. ${pergunta.pergunta}`}</h3>
             {materias.map((materia) => (
               
-              <div key={materia.id}>
-                <h2 key={materia.id}>{materia.materias.materia}</h2>
-                <h2 key={materia.id}>{materia.professores.nome}</h2>
-                <br></br><br></br>
-                <input type="text" name={`${pergunta.id}${materia.idMateria}`} id="" />
+              <div key={materia.id} className="mt-8" >
+                <h2 key={materia.id}>{`${materia.materias.materia} (${materia.professores.nome})`}</h2>
+                
+                <input type="text" className="border rounded-md h-20 p-5" maxLength={200} placeholder="Escreva aqui..." name={`${pergunta.id}${materia.idMateria}`} id="" />
               </div>
               
             ))}
@@ -84,5 +87,6 @@ export default function StepForm(){
         )
       ))}
     </div>
+    </>
   );
 }
