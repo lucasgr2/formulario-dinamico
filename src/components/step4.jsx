@@ -1,21 +1,22 @@
 /* eslint-disable react/prop-types */
 import { useEffect,useState } from "react";
 import { useAnswers } from "../context/answersContext";
+import api from "../services/api";
 
 export default function Step4(){
     const {data, updateSetData} = useAnswers();
     // Para exibir as turmas do tipo ensino selecionado
     const [turmas, setTurmas] = useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:3333/turmas/${data.tipoEnsino}`,{
-            method:'GET',
-            headers:{
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response)=>response.json())
-            .then((data)=>{setTurmas(data)})
-            .catch((err)=>console.log(err))
+        async function FetchData(){
+            try {
+                const response = await api.get(`/turmas/${data.tipoEnsino}`);
+                setTurmas(response.data)
+              } catch (error) {
+                console.error(error);
+            }
+        };
+        FetchData();
     },[])
     //Para passar para o formulario as materias da respectiva turma
     return(

@@ -20,7 +20,7 @@ export default function Step5(){
         <div className="checkbox__container">
         {materias.map((materia) => (
             <label key={materia.id}>
-            <input className="radio-input" type="checkbox" checked={data.materias.includes(materia.id)}
+            <input className="radio-input" type="checkbox"  checked={data.materias.includes(materia.id)}
                             onChange={(e) => {
                                 const materiaId = materia.id;
                                 const isChecked = e.target.checked;

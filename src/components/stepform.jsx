@@ -19,6 +19,7 @@ export default function StepForm(){
       const perguntasResponse = await fetch("http://localhost:3333/perguntas");
       const perguntasData = await perguntasResponse.json();
       setPerguntas(perguntasData);
+      updateSetData('perguntas' ,perguntasData);
 
       const materiasResponse = await fetch(`http://localhost:3333/relacaoAulas/${data.turma}`);
       const materiasData = await materiasResponse.json();
@@ -27,7 +28,10 @@ export default function StepForm(){
       if (data.materias.length > 0){
         const arrayFiltrado = await materiasData.filter(objeto => data.materias.includes(objeto.id_materia));
         setMaterias(arrayFiltrado);
-      }  
+        updateSetData('materias' ,arrayFiltrado);
+      }else{
+        updateSetData('materias' ,materiasData);
+      }
     }
     fetchData();
   },[])
@@ -55,17 +59,17 @@ export default function StepForm(){
               {/* MAPEANDO AS MATERIAS */}
               {materias.map((materia) => (
               
-                <div key={materia.id} className="grid grid-cols-subgrid col-span-5 "> 
+                <div key={materia.id_materia} className="grid grid-cols-subgrid col-span-5 "> 
                   <div className="text-sm font-medium col-start-1 col-end-3">
-                    <h2 key={materia.id}>{materia.materias.materia}</h2>
-                    <h2 key={materia.id}>{materia.professores.nome}</h2>
+                    <h2 >{materia.materias.materia}</h2>
+                    <h2 >{materia.professores.nome}</h2>
                   </div>
                   <div className=" col-start-3 col-end-6 flex justify-around">
-                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="0" required />
-                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="1" required />
-                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="2" required />
-                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="3" required />
-                    <input type="radio" name={`${pergunta.id}${materia.id}`} id="" value="4" required />
+                    <input type="radio" name={`${pergunta.id}${materia.id_materia}${materia.id_professor}`}  id="" value="4" required />
+                    <input type="radio" name={`${pergunta.id}${materia.id_materia}${materia.id_professor}`}  id="" value="3" required />
+                    <input type="radio" name={`${pergunta.id}${materia.id_materia}${materia.id_professor}`}  id="" value="2" required />
+                    <input type="radio" name={`${pergunta.id}${materia.id_materia}${materia.id_professor}`}  id="" value="1" required />
+                    <input type="radio" name={`${pergunta.id}${materia.id_materia}${materia.id_professor}`}  id="" value="0" required />
                   </div>
                 </div>
               ))}
@@ -76,10 +80,10 @@ export default function StepForm(){
             <h3 key={pergunta.id} className="font-medium mt-7">{`${pergunta.id}. ${pergunta.pergunta}`}</h3>
             {materias.map((materia) => (
               
-              <div key={materia.id} className="mt-8" >
-                <h2 key={materia.id}>{`${materia.materias.materia} (${materia.professores.nome})`}</h2>
+              <div key={materia.id_materia} className="mt-8" >
+                <h2 key={materia.id_materia}>{`${materia.materias.materia} (${materia.professores.nome})`}</h2>
                 
-                <input type="text" className="border rounded-md h-20 p-5" maxLength={200} placeholder="Escreva aqui..." name={`${pergunta.id}${materia.idMateria}`} id="" />
+                <input type="text" className="border rounded-md h-20 p-5" maxLength={200} placeholder="Escreva aqui..." name={`${pergunta.id}${materia.id_materia}${materia.id_professor}`} id="" />
               </div>
               
             ))}

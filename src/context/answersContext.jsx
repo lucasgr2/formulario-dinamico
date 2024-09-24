@@ -4,10 +4,11 @@ import { createContext, useContext, useState } from "react"
 const answersContext = createContext({});
 
 const answersTemplate = {
-    tipoEnsino: "lucas",
+    tipoEnsino: "",
     turma:"",
+    perguntas:[],
     materias: [],
-    respostas: {}
+    respostas: [],
 }
 
 function AnswersProvider({children}){

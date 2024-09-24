@@ -11,16 +11,20 @@ function FormularioPage() {
   const [status, setStatus] = useState(2);
   if(status == 0){
     return( <FormDesativadoPage/> )
+
   }else if(status == 1){
     return( <FormRespondidoPage status = {status} setStatus = {setStatus}/> )
+
   }else if(status == 2){
     return (
       <AnswersProvider>
         <FormularioLayout />
       </AnswersProvider>   
     )
+
   }else if(status == 3){
     return( <FormSucessoPage/> )
+    
   }
 }
 
